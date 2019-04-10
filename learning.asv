@@ -1,0 +1,26 @@
+function new_weight_matrix = learning(weight_matrix, from_act_select, to_activation_matrix, alpha, eta)
+%function for implementing learning
+%weight matrix - stores the synaptic weights, can be inter- or intra- layer weights
+%from_act_select(linear) - activation corresponding to neurons in 'from' layer
+%to_activation_matrix(linear) - activation corresponding to neurons in 'to' layer,
+%will be the same as from_activation_matrix for intra-layer updation of activation
+%alpha and eta - parameters specified in the reference paper
+
+new_weight
+elements = size(weight_matrix,1); %determine number of neurons in 'to' layer = number of rows 
+neighbours = size(weight_matrix,2); %determine number of neurons in 'from' layer = number of columns
+
+temp_wt_to = to_activation_matrix; %create a copy of the to_activation_matrix
+index = find(to_activation_matrix > alpha); 
+temp_wt_to(index) = alpha; %set those elements > alpha to alpha
+ak = to_activation_matrix - temp_wt_to; %all elements <= alpha will become zero and others will be, element-alpha
+ak_tiled = repmat(ak, [1 neighbours]); %num-of-elementsXnum-of-neighbours
+
+delta_wt = eta * (from_act_select - weight_matrix) .* ak_tiled;  %calculate change in weight
+new_weight_matrix = weight_matrix + delta_wt;
+
+
+
+
+                
+         
