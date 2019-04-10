@@ -2,6 +2,7 @@
 s=20; %'s' is for single and is used in place of 20 in the final code
 d=400; %'d' is for double and is used in place of 400 in final code
 
+
 %----------The MI layer - has 20X20 elements - declarations----------------
 %%% WITHIN PI
 MI = ones(s,s);  %the initial random matrix for activation values in MI layer
